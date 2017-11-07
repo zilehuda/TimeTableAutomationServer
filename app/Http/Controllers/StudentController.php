@@ -7,9 +7,14 @@ use App\Course;
 
 class StudentController extends Controller
 {
+    public function TestFun()
+    {
+      $courses = Course::where('short','AI')->first();
+      return response()->json($courses);
+    }
     public function GetCourses()
     {
-      $courses = Course::where('code','BD499')->first();
+      $courses = Course::all();
       return response()->json($courses);
     }
 }
