@@ -20,7 +20,7 @@ class CreateTimetableTable extends Migration
             $table->foreign('f_code')->references('code')->on('courses');
             $table->string('day');
             $table->char('slot',10);
-            $table->char('section',3);
+            $table->char('section',20);
             $table->time('starttime');
             $table->time('endtime');
         });

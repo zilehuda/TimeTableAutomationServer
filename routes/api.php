@@ -25,13 +25,13 @@ Route::get('/test',function(){
 });
 });
 
-
+Route::get('posting','StudentController@testing');
 Route::group(['prefix' => 'student']
 ,function()
 {
-  //save student courses and section
-Route::post('/{id}','StudentController@SetStudent')->where(['id'=>"k[0-9]+"]);
+  //get student time table based on course and section;
+Route::post('/timetable','StudentController@GetTimetable');
 //get all the courses of batch XXXX
-Route::get('/{batch}',"StudentController@GetStudentCourses")->where(['batch'=>"[0-9]+"]);
+Route::post('/',"StudentController@GetBatchCourses");
 Route::get('/courses',"StudentController@GetCourses");
 });

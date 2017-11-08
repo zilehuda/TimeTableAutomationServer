@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/index',"Controller@index");
-Route::get('/upload-timetable',"Controller@UploadTimetable");
-Route::get('/upload-course',"Controller@UploadCourses");
-Route::get('/upload-teacher',"Controller@UploadTeacher");
+//Route::get('/upload-timetable',"Controller@UploadTimetable");
+//Route::get('/upload-course',"Controller@UploadCourses");
+//Route::get('/upload-teacher',"Controller@UploadTeacher");
