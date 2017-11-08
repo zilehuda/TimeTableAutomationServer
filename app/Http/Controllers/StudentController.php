@@ -88,7 +88,7 @@ class StudentController extends Controller
     }
     public function GetCourses()
     {
-      $courses = Course::where('section','F')->get();
+      $courses = Course::select("code","title","short")->get();
       return response()->json($courses);
     }
 }
