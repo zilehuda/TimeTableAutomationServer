@@ -29,9 +29,11 @@ Route::get('posting','StudentController@testing');
 Route::group(['prefix' => 'student']
 ,function()
 {
-  //get student time table based on course and section;
+Route::post('/add','StudentController@AddStudent');
+//get student time table based on course and section;
 Route::post('/timetable','StudentController@GetTimetable');
 //get all the courses of batch XXXX
 Route::post('/',"StudentController@GetBatchCourses");
+
 Route::get('/courses',"StudentController@GetCourses");
 });
