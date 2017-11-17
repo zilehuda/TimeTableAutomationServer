@@ -15,12 +15,8 @@ class Controller extends BaseController
     public $json;
     public function index()
     {
-      $str = "AI-Gr1 Ali Naqvi";
-      $new = explode(" ",$str);
-      print_r ($new[0]);
-      $section = explode("-",$new[0]);
-      print_r ($section[0]);
-      //$this->UpdateTimetableDB('CL101','mon','E2','C','8:00','8:55','asdad');
+      $d = Course::all();
+      dd($d);
     }
     public function UploadTimetable()
     {
