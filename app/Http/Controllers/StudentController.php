@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
+  protected $a;
 
   public function testing(Request $req)
   {
@@ -54,16 +55,15 @@ class StudentController extends Controller
           $items[] = $value->section;
 
         }
-
         else {
           $courses_code[$i]->section = $items;
           $items = array();
           $items[] = $value->section;
           $i++;
         }
-
-
         }
+
+
 
       return response()->json($courses_code);
     }
@@ -81,14 +81,52 @@ class StudentController extends Controller
     }
     public function GetTimetable(Request $req)
     {
-      $t = Timetable::where('section',$req->section)
-                      ->where('f_code',$req->f_code)
-                      ->get();
+      $t = DB::table('timetable')
+                    ->join('courses','courses.code','=','timetable.f_code')
+                    ->where('section',$req->section)
+                    ->where('f_code',$req->f_code)
+                    ->select('timetable.*','courses.title','courses.short')
+                    ->get();
       return response()->json($t);
+    }
+    public function GetTime(Request $req)
+    {
+      $output = print_r($req->getContent(), true);
+      file_put_contents('main.txt', $output);
+      $item = [];
+      //return response()->json($item);
+      $obj = json_decode($req->getContent(), true);
+
+      foreach ($obj as $key => $value) {
+        $t = DB::table('timetable')
+                      ->join('courses','courses.code','=','timetable.f_code')
+                      ->where('section',$value['section'])
+                      ->where('f_code',$value['f_code'])
+                      ->select('timetable.*','courses.title','courses.short')
+                      ->get();
+        foreach ($t as $key) {
+          $item[]=$key;
+          //return response()->json($key);
+        }
+
+
+      }
+      return response()->json($item);
+        //return response()->json($req->section);
+
+
     }
     public function GetCourses()
     {
-      $courses = Course::select("code","title","short")->get();
+      $courses = Course::all();
+      return response()->json($courses);
+    }
+
+    public function GetCoursesPost(Request $req)
+    {
+      $courses = Course::select("code","title","short")
+                  ->where("code",$req->code)
+                  ->get();
       return response()->json($courses);
     }
 }
